@@ -4,7 +4,7 @@ It uses the Google News API through [newsapi](http://newsapi.org).
 
 ### Instructions
 #### Requirements
-1. Go installed
+1. Go installed. You can take a look at the [official guide](https://golang.org/doc/install)
 2. API key from [newsapi](http://newsapi.org). 
     Inside the project folder, create a file called ".env" and inside it, put
     ```
