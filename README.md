@@ -12,12 +12,12 @@ It uses the Google News API through [newsapi](http://newsapi.org).
     ```
 3. Go to the project folder and run!
 
-    ```console
+    ```
     go run noticias.go
     ```
 
     The output should look something like this
-    ```console
+    ```
     Titulo: Fuerte apoyo de los industriales a Alberto Fernández, aunque las expectativas sobre la economía son moderadas 
     Desc: <ol><li>Fuerte apoyo de los industriales a Alberto Fernández, aunque las expectativas sobre la economía son moderadas  infobae
     </li><li>Las 15 definiciones económicas de Alberto Fernández  ámbito.com
