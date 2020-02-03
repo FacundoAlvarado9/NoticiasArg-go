@@ -30,8 +30,9 @@ type Entrada struct {
 	Articles     []Article
 }
 
-func main() {
-	//Getting acces to API key from .env file
+// Parses the news and returns them as an array of Articles
+func parseNews() []Article {
+	//Getting access to API key from .env file
 	err := godotenv.Load()
 	if(err != nil){
 		log.Fatal("Error loading env variables")
@@ -47,20 +48,25 @@ func main() {
 
 	defer resp.Body.Close()
 
-	//Parsing request body
+	//Parsing request body and storing it in a string
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	newsJSON := string(body)
+	newsJsonString := string(body)
 
-	//Sending it to an Array of news
+	//Getting array of news from body string
 	var entries Entrada
+
+	json.Unmarshal([]byte(newsJsonString), &entries)
+	return entries.Articles
+}
+
+func main() {
 	var articles []Article
 
-	json.Unmarshal([]byte(newsJSON), &entries)
-	articles = entries.Articles
+	articles = parseNews();
 
 	//Prints title, description and url on console
 	for i := 0; i < len(articles); i++ {
