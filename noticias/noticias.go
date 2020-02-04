@@ -82,7 +82,7 @@ func handler(w http.ResponseWriter, r *http.Request){
 		}
 
 		// Printing them on screen
-		linea := "Titulo: " + articles[i].Title + "\n " + "Desc: " + articles[i].Description + "\n Link: <a href=\"" + articles[i].Url + "\"> link </a> \n \n"
+		linea := "Titulo: <b>" + articles[i].Title + "</b> <br>" + "Desc: " + articles[i].Description + "<br> Link: <a href=\"" + articles[i].Url + "\"> link </a> <br><br>"
 		fmt.Fprintf(w, "<html>" + linea + "</html>")
 	}
 }
