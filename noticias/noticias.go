@@ -12,6 +12,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 )
 
 //Article model
@@ -63,14 +64,30 @@ func parseNews() []Article {
 	return entries.Articles
 }
 
-func main() {
+func handler(w http.ResponseWriter, r *http.Request){
 	var articles []Article
-
-	articles = parseNews();
+	articles = parseNews()
 
 	//Prints title, description and url on console
 	for i := 0; i < len(articles); i++ {
-		linea := "Titulo: " + articles[i].Title + " \n " + "Desc: " + articles[i].Description + "\n Link: " + articles[i].Url + " \n \n"
-		fmt.Printf(linea)
+		// Taking the apparently common <li> </li> <ol> from the descriptions
+		if (strings.Contains(articles[i].Description, "<li>")){
+			articles[i].Description = strings.ReplaceAll(articles[i].Description, "<li>", "")
+		}
+		if (strings.Contains(articles[i].Description, "</li>")){
+			articles[i].Description = strings.ReplaceAll(articles[i].Description, "</li>", "")
+		}
+		if (strings.Contains(articles[i].Description, "<ol>")){
+			articles[i].Description = strings.ReplaceAll(articles[i].Description, "<ol>", "")
+		}
+
+		// Printing them on screen
+		linea := "Titulo: " + articles[i].Title + "\n " + "Desc: " + articles[i].Description + "\n Link: <a href=\"" + articles[i].Url + "\"> link </a> \n \n"
+		fmt.Fprintf(w, "<html>" + linea + "</html>")
 	}
+}
+
+func main() {
+	http.HandleFunc("/noticias", handler)
+	log.Fatal(http.ListenAndServe(":8000", nil))	
 }
