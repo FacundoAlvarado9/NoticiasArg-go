@@ -1,5 +1,5 @@
 # NoticiasArg-go
-Simple go command-line project that retrieves the most relevant news from Argentina and shows them to you on screen.
+Simple go web server project that retrieves the most relevant news from Argentina and shows them to you on screen.
 It uses the Google News API through [newsapi](http://newsapi.org).
 
 ### Instructions
